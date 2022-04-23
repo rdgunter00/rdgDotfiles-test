@@ -1,0 +1,91 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        interval = 5
+        color = '#ffffff'
+        color_good = '#53a6a6'
+        color_bad = '#9e9ecb'
+        color_degraded = '#bf4d80'
+}
+
+order += "window"
+#order += "ipv6"
+order += "wireless _first_"
+#order += "ethernet _first_"
+order += "battery all"
+order += "disk /"
+order += "load"
+order += "memory"
+order += "volume_status speakers"
+order += "weather_owm denison"
+#order += "clock"
+order += "tztime local"
+
+wireless _first_ {
+        format_up = "%quality at %essid | %ip"
+        format_down = "Wi-Fi down"
+}
+
+ethernet _first_ {
+        format_up = "E: %ip (%speed)"
+        format_down = "E: down"
+}
+
+battery all {
+        format = "%status %percentage"
+}
+
+disk "/" {
+        format = "%avail"
+}
+
+load {
+        format = "%1min"
+}
+
+memory {
+        format = "%used"
+        threshold_degraded = "1G"
+        format_degraded = "MEMORY < %available"
+}
+
+tztime local {
+#        format = "%Y-%m-%d %H:%M:%S"
+	format = "%d-%m-%Y %H:%M:%S"
+}
+clock {
+   format = "Home {America/Chicago}"
+   format_time = "%Y-%m-%d %H:%M:%S"
+}
+window_title {
+    format = '{title}|♥'
+    max_width = "50px"
+}
+volume_status speakers {
+	command = "pactl"
+	format = ' {percentage}%'
+	format_muted = ' {percentage}%'
+	button_down = 2
+#	button_mute = 1
+	button_up = 1
+	thresholds = [(0, 'bad'), (5, 'degraded'), (10, 'good')]
+	max_volume = 100
+}
+weather_owm denison {
+#	api_key = env("5178ccced6e798a3abf365e77fe3ee81")
+	cache_timeout = 7200
+	forecast_include_today = True
+	format = "{city}"
+	icon_sun = "☀"
+	icon_rain = "☂"
+	icon_thunderstorm = "☔"
+	unit_temperature = "f"
+#	on_click 1 = "exec firefox-bin http://www.meteo.fr"
+}

@@ -1,0 +1,9 @@
+/** Basic config file **/
+
+configuration {
+  show-icons:         true;
+  icon-theme:         "~/.local/share/icons/Reversal-pink-dark";
+}
+element-icon {
+    size:             5.0em ;
+}
